@@ -5,3 +5,5 @@ ASP.NET MVC framework
 C#
 SQL Server database
 Installation
+##Contributing
+Contributions to this project are welcome. If you find a bug or want to suggest an improvement, please open an issue or submit a pull request.
