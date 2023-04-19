@@ -1,5 +1,10 @@
-var builder = WebApplication.CreateBuilder(args);
+using PublicFavBeers.Config;
+using PublicFavBeers.Interfaces;
+using PublicFavBeers.Repo;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddTransient<IBeerRepo, BeerRepo>();
+builder.Services.AddSingleton<IConfig, PublicFavBeerConfig>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

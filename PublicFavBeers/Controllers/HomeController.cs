@@ -1,32 +1,38 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PublicFavBeers.Interfaces;
 using PublicFavBeers.Models;
-using System.Diagnostics;
 
 namespace PublicFavBeers.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IBeerRepo _BeerRepo;
+        public HomeController(IBeerRepo beerRepo)
         {
-            _logger = logger;
+            _BeerRepo = beerRepo;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var beers = _BeerRepo.GetAllBeer();
+            return View(beers);
+        }
+        public IActionResult InsertBeer()
+        {
+            return View("InsertBeer",new BeerModel());
+        }
+        public async Task<IActionResult> AddBeer(BeerModel beer)
+        {
+            var beerInserted = await _BeerRepo.AddBeer(beer);
+
+            if (beerInserted != null)
+            {
+                return View("ErrorPage");
+            }
+            return RedirectToAction("Index");
+            
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
