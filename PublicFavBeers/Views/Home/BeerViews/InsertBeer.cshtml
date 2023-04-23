@@ -1,5 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿
+@model BeerModel
+@using (Html.BeginForm("InsertBeer", "PublicFavBeer", "post"))
+{
+    <input asp-for="id" type="hidden" value="@Model.id" />
+
+
+    <label asp-for="Image" class="control-label">Image</label>
+    <input type="text" name="Image" class="form-control" value="@Model.Image" />
+
+
+
+    <label asp-for="BeerName" class="control-label">Beer Name</label>
+    <input type="text" name="BeerName" class="form-control" value="@Model.BeerName" />
+
+
+
+    <label asp-for="BreweryName" class="control-label">Brewery Name</label>
+    <input type="text" name="BreweryName" class="form-control" value="@Model.BreweryName" />
+
+
+
+    <label asp-for="Description" class="control-label">Description</label>
+    <input type="text" name="Description" class="form-control" value="@Model.Description" />
+
+    <input type="submit" value="ADD" class="btn btn-primary" />
 }

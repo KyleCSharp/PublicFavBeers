@@ -2,23 +2,25 @@
     ViewData["Title"] = "Home Page";
 }
 @model IEnumerable<BeerModel>
- 
+<div style="display: block">
+    <a class='btn btn-primary btn-lg' href="/PublicFavBeer/InsertBeer">Add a new beer</a>
+</div>
  <table class="table">
      <tr>
-         <th>Image</th>
-         <th>ImageName</th>
+         <th>Image</th>     
          <th>BeerName</th>
          <th>BreweryName</th>
          <th>Description</th>
      </tr>
- </table>
+ 
 @foreach (var beer in Model)
 {
-    <tr>
-        <td>@beer.ImageData</td>
-        <td>@beer.ImageName</td>
+    <tr>       
+        <td><img src="data:image/png;base64,@Convert.ToBase64String(beer.Image)" /></td>
         <td>@beer.BeerName</td>
         <td>@beer.BreweryName
         <td>@beer.Description</td>
     </tr>
+    
 }
+</table>

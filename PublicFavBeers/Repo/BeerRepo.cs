@@ -16,7 +16,8 @@ namespace PublicFavBeers.Repo
         {
             using var conn = new SqlConnection(_config.GetConnectionString());
             conn.Open();
-            return conn.Query<BeerModel>("SELECT * FROM kyletest.PublicFavBeer");      
+            return conn.Query<BeerModel>("SELECT * FROM dbo.PublicFavBeer");
+
         }
 
         Task<string> IBeerRepo.AddBeer(BeerModel beer)

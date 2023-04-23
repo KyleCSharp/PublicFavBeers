@@ -9,7 +9,7 @@ namespace PublicFavBeers.Controllers
 
         private readonly IBeerRepo _BeerRepo;
         public HomeController(IBeerRepo beerRepo)
-        {
+        { 
             _BeerRepo = beerRepo;
         }
         public async Task<IActionResult> Index()
