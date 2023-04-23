@@ -12,26 +12,27 @@ namespace PublicFavBeers.Controllers
         { 
             _BeerRepo = beerRepo;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var beers = _BeerRepo.GetAllBeer();
             return View(beers);
         }
         public IActionResult InsertBeer()
         {
-            return View("InsertBeer",new BeerModel());
+            return View("BeerViews/InsertBeer", new BeerModel());
         }
-        public async Task<IActionResult> AddBeer(BeerModel beer)
+        public IActionResult InsertBeerToDataBase(BeerModel beer)
         {
-            var beerInserted = await _BeerRepo.AddBeer(beer);
-
-            if (beerInserted != null)
-            {
-                return View("ErrorPage");
-            }
+            _BeerRepo.InsertBeer(beer);
             return RedirectToAction("Index");
-            
+           
         }
+        public IActionResult viewBeer (int id)
+        {
+            var beer = _BeerRepo.GetBeerById(id);
+            return View(beer);
+        }
+        
 
 
     }

@@ -5,7 +5,8 @@ namespace PublicFavBeers.Interfaces
 {
     public interface IBeerRepo
     { 
-        public Task<string> AddBeer(BeerModel beer);
+        public void InsertBeer(BeerModel beerToInsert);
         public IEnumerable<BeerModel> GetAllBeer();
+        public BeerModel GetBeerById(int id);
     }
 }

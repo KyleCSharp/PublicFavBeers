@@ -8,7 +8,7 @@ namespace PublicFavBeers.Repo
     public class BeerRepo : IBeerRepo
     {
         private readonly IConfig _config;
-        public BeerRepo (IConfig config)
+        public BeerRepo(IConfig config)
         {
             _config = config;
         }
@@ -17,12 +17,21 @@ namespace PublicFavBeers.Repo
             using var conn = new SqlConnection(_config.GetConnectionString());
             conn.Open();
             return conn.Query<BeerModel>("SELECT * FROM dbo.PublicFavBeer");
-
         }
 
-        Task<string> IBeerRepo.AddBeer(BeerModel beer)
+        public BeerModel GetBeerById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public void InsertBeer(BeerModel beerToInsert)
+        {
+            using var conn = new SqlConnection(_config.GetConnectionString());
+            conn.Open();
+            conn.Execute("(INSERT INTO dbo.PublicFavBeer (ID,Name,Image, Description, BreweryName ) VALUES (@ID, @Name, @Image, @Description, @BreweryName);",
+                new { Name = beerToInsert.Name, Image = beerToInsert.Image, Description = beerToInsert.Description, BreweryName = beerToInsert.BreweryName});
+            conn.Close();
+          
         }
     }
 }
