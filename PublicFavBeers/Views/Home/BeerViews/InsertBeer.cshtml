@@ -7,14 +7,14 @@
 
     <div>
         <input asp-for="Image" type="hidden" value="@Model.Image"/>
-        <input type="file" name="Image" class="form-control" value="@Model.Image"/>
+        <input type="file" name="Image" class="form-control" accept=".png,.jpg,.jpeg" />
     </div>
     
 
 
 
     <label asp-for="Name" class="control-label">Beer Name</label>
-    <input type="text" name="BeerName" class="form-control" value="@Model.Name"/>
+    <input type="text" name="Name" class="form-control" value="@Model.Name"/>
 
 
 

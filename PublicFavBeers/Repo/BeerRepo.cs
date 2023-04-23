@@ -2,6 +2,8 @@
 using Microsoft.Data.SqlClient;
 using PublicFavBeers.Interfaces;
 using PublicFavBeers.Models;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PublicFavBeers.Repo
 {
@@ -28,10 +30,28 @@ namespace PublicFavBeers.Repo
         {
             using var conn = new SqlConnection(_config.GetConnectionString());
             conn.Open();
-            conn.Execute("(INSERT INTO dbo.PublicFavBeer (ID,Name,Image, Description, BreweryName ) VALUES (@ID, @Name, @Image, @Description, @BreweryName);",
-                new { Name = beerToInsert.Name, Image = beerToInsert.Image, Description = beerToInsert.Description, BreweryName = beerToInsert.BreweryName});
+
+            //byte[] imageBytes;
+            //using (var ms = new MemoryStream())
+            //{
+            //    beerToInsert.Image.CopyTo(ms);
+            //    imageBytes = ms.ToArray();
+            //}
+            string imageString = Convert.ToBase64String(beerToInsert.Image);
+            conn.Execute("INSERT INTO dbo.PublicFavBeer (Name, Image, Description, BreweryName) VALUES (@Name, @Image, @Description, @BreweryName);",
+                new { beerToInsert.Name, Image = imageString, beerToInsert.Description, beerToInsert.BreweryName });
+
+
             conn.Close();
-          
         }
+
+
+
+
+
+
+
+
+
     }
 }

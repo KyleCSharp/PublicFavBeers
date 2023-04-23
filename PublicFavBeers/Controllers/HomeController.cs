@@ -21,12 +21,14 @@ namespace PublicFavBeers.Controllers
         {
             return View("BeerViews/InsertBeer", new BeerModel());
         }
-        public IActionResult InsertBeerToDataBase(BeerModel beer)
+        [HttpPost]
+        public IActionResult InsertBeerToDataBase(BeerModel beerToInsert)
         {
-            _BeerRepo.InsertBeer(beer);
+            _BeerRepo.InsertBeer(beerToInsert);
+
             return RedirectToAction("Index");
-           
         }
+
         public IActionResult viewBeer (int id)
         {
             var beer = _BeerRepo.GetBeerById(id);
