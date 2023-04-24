@@ -2,16 +2,16 @@
 @model BeerModel
 @using (Html.BeginForm("InsertBeerToDataBase", "Home", "post"))
 {
-    <input asp-for="id" type="hidden" value="@Model.id" />
+    <input asp-for="id" type="hidden" value="@Model.id"/>
 
-
-    <div>
-        <input asp-for="Image" type="hidden" value="@Model.Image"/>
-        <input type="file" name="Image" class="form-control" accept=".png,.jpg,.jpeg" />
+    <div class="form-group">
+        <form asp-controller="HomeController" asp-action="Upload" method="post" enctype="multipart/form-data">
+            <div class="form-group m-3">
+        <label asp-for="@Model.Data" class="control-label"></label>
+        <input type="file" asp-for="@Model.Data" /> 
+            </div>
+    </form>
     </div>
-    
-
-
 
     <label asp-for="Name" class="control-label">Beer Name</label>
     <input type="text" name="Name" class="form-control" value="@Model.Name"/>

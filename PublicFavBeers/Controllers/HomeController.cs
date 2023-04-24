@@ -34,7 +34,34 @@ namespace PublicFavBeers.Controllers
             var beer = _BeerRepo.GetBeerById(id);
             return View(beer);
         }
-        
+        [HttpGet]
+        public IActionResult Upload()
+        {
+            var model = new BeerModel();
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult Upload(BeerModel model)
+        {
+            byte[]? data = null;
+            using (var ms = new MemoryStream())
+            {
+                model.Data.CopyToAsync(ms);
+                data = ms.ToArray();
+            }
+
+            var picture = new BeerModel()
+            {
+               
+                Image = data
+            };
+
+            _BeerRepo.InsertBeer(picture);
+
+            return RedirectToAction("Index", "Image");
+        }
+
+
 
 
     }

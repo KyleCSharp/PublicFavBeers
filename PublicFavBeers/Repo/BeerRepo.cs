@@ -1,9 +1,8 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using PublicFavBeers.Interfaces;
 using PublicFavBeers.Models;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PublicFavBeers.Repo
 {
@@ -18,6 +17,7 @@ namespace PublicFavBeers.Repo
         {
             using var conn = new SqlConnection(_config.GetConnectionString());
             conn.Open();
+
             return conn.Query<BeerModel>("SELECT * FROM dbo.PublicFavBeer");
         }
 
@@ -26,32 +26,27 @@ namespace PublicFavBeers.Repo
             throw new NotImplementedException();
         }
 
-        public void InsertBeer(BeerModel beerToInsert)
+        [HttpPost]
+        public async Task InsertBeer(BeerModel beerToInsert)
         {
-            using var conn = new SqlConnection(_config.GetConnectionString());
-            conn.Open();
-
-            //byte[] imageBytes;
+            //byte[] data = null;
             //using (var ms = new MemoryStream())
             //{
-            //    beerToInsert.Image.CopyTo(ms);
-            //    imageBytes = ms.ToArray();
+            //    await beerToInsert.Data.CopyToAsync(ms);
+            //    data = ms.ToArray();
             //}
-            string imageString = Convert.ToBase64String(beerToInsert.Image);
+
+            //var picture = new BeerModel()
+            //{
+            //    Image = data
+            //};
+
+            using var conn = new SqlConnection(_config.GetConnectionString());
+            conn.Open();
             conn.Execute("INSERT INTO dbo.PublicFavBeer (Name, Image, Description, BreweryName) VALUES (@Name, @Image, @Description, @BreweryName);",
-                new { beerToInsert.Name, Image = imageString, beerToInsert.Description, beerToInsert.BreweryName });
-
-
+                new { beerToInsert.Name, beerToInsert.Image, beerToInsert.Description, beerToInsert.BreweryName });
             conn.Close();
         }
-
-
-
-
-
-
-
-
 
     }
 }

@@ -17,9 +17,9 @@
  
 @foreach (var beer in Model)
 {
-    <tr> 
-        
-            <td><img src="data:image/png;base64,@beer.Image" /></td>
+    <tr>
+
+            <td><img src="data:image/png;base64,@Convert.ToBase64String(beer.Image)" /></td>
         <td>@beer.Name</td>
         <td>@beer.BreweryName
         <td>@beer.Description</td>
