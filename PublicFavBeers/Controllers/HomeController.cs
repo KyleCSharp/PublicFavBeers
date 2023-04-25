@@ -17,31 +17,15 @@ namespace PublicFavBeers.Controllers
             var beers = _BeerRepo.GetAllBeer();
             return View(beers);
         }
-        public IActionResult InsertBeer()
-        {
-            return View("BeerViews/InsertBeer", new BeerModel());
-        }
-        [HttpPost]
-        public IActionResult InsertBeerToDataBase(BeerModel beerToInsert)
-        {
-            _BeerRepo.InsertBeer(beerToInsert);
-
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult viewBeer (int id)
-        {
-            var beer = _BeerRepo.GetBeerById(id);
-            return View(beer);
-        }
+        
         [HttpGet]
         public IActionResult Upload()
         {
-            var model = new BeerModel();
+            var model = new ImageViewModel();
             return View(model);
         }
         [HttpPost]
-        public IActionResult Upload(BeerModel model)
+        public IActionResult Upload(ImageViewModel model)
         {
             byte[]? data = null;
             using (var ms = new MemoryStream())
@@ -52,8 +36,11 @@ namespace PublicFavBeers.Controllers
 
             var picture = new BeerModel()
             {
-               
-                Image = data
+                Name = model.Name,
+                Image = data,
+                id = model.id,
+                Description= model.Description,
+                BreweryName = model.BreweryName
             };
 
             _BeerRepo.InsertBeer(picture);
