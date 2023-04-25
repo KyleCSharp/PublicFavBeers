@@ -30,7 +30,7 @@ namespace PublicFavBeers.Controllers
         {
             if (model == null)
             {
-                // handle the null reference exception here
+                
                 return BadRequest();
             }
             byte[]? data = null;
@@ -51,7 +51,7 @@ namespace PublicFavBeers.Controllers
 
             _BeerRepo.InsertBeer(picture);
 
-            return RedirectToAction("Index", "Image");
+            return RedirectToAction("Index", "Home");
         }
 
 

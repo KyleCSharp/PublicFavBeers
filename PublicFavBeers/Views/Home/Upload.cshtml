@@ -1,14 +1,14 @@
 ﻿@model ImageViewModel
-@using (Html.BeginForm("Upload", "Home", "Post"))
-{
+
+
     <div class="container border border-3">
-    <form asp-controller="Image" asp-action="Upload" method="post" enctype="multipart/form-data">
+    <form asp-controller="Home" asp-action="Upload" method="post" enctype="multipart/form-data">
         <div class="form-group m-3">
             <label asp-for="@Model.Name" class="control-label"></label>
             <input type="text" asp-for="@Model.Name" />
         </div>
         <div class="form-group m-3">
-            <label asp-for="@Model.Data" class="control-label"></label>
+            <label asp-for="@Model.Data"  class="control-label"></label>
             <input type="file" asp-for="@Model.Data" />
         </div>
         <div class="form-group m-3">
@@ -25,44 +25,3 @@
         </div>
     </form>
 </div>
-}
-
-
-
-
-
-
-
-
-@*
-@model ImageViewModel
-
-
-    <input asp-for="id" type="hidden" value="@Model.id"/>
-
-    <div class="form-group">
-        <form asp-controller="Home" asp-action="Upload" method="post" enctype="multipart/form-data">
-            <div class="form-group m-3">
-        <label asp-for="@Model.Data" class="control-label"></label>
-        <input type="file" asp-for="@Model.Data" /> 
-            </div>
-    </form>
-    </div>
-
-    <label asp-for="Name" class="control-label">Beer Name</label>
-    <input type="text" name="Name" class="form-control" value="@Model.Name"/>
-
-
-
-    <label asp-for="BreweryName" class="control-label">Brewery Name</label>
-    <input type="text" name="BreweryName" class="form-control" value="@Model.BreweryName"/>
-
-
-
-    <label asp-for="Description" class="control-label">Description</label>
-    <input type="text" name="Description" class="form-control" value="@Model.Description"/>
-    <div class="submit">
-        <input type="submit" value="Submit" class="btn btn-primary" />
-    </div>
-    
-*@
