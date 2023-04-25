@@ -26,11 +26,17 @@ namespace PublicFavBeers.Controllers
         }
         [HttpPost]
         public IActionResult Upload(ImageViewModel model)
+
         {
+            if (model == null)
+            {
+                // handle the null reference exception here
+                return BadRequest();
+            }
             byte[]? data = null;
             using (var ms = new MemoryStream())
             {
-                model.Data.CopyToAsync(ms);
+                model.Data.CopyTo(ms);
                 data = ms.ToArray();
             }
 

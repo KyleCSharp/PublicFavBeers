@@ -1,6 +1,7 @@
 ﻿@model ImageViewModel
-
-<div class="container border border-3">
+@using (Html.BeginForm("Upload", "Home", "Post"))
+{
+    <div class="container border border-3">
     <form asp-controller="Image" asp-action="Upload" method="post" enctype="multipart/form-data">
         <div class="form-group m-3">
             <label asp-for="@Model.Name" class="control-label"></label>
@@ -24,6 +25,8 @@
         </div>
     </form>
 </div>
+}
+
 
 
 
