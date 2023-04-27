@@ -1,29 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<div class="Background"></div>
 @model IEnumerable<BeerModel>
 
 <div style="display: block">
     <a class='btn btn-primary btn-lg' href="Home/Upload">Add new beer</a>
 </div>
- <table class="table">
-     <tr> 
-         
-         <th>Image</th>     
-         <th>BeerName</th>
-         <th>BreweryName</th>
-         <th>Description</th>
-     </tr>
- 
-@foreach (var beer in Model)
-{
+<table class="table">
     <tr>
-
-            <td><img src="data:image/png;base64,@Convert.ToBase64String(beer.Image)" /></td>
-        <td>@beer.Name</td>
-        <td>@beer.BreweryName
-        <td>@beer.Description</td>
+        <th>Image</th>
+        <th>Beer Name</th>
+        <th>Brewery Name</th>
+        <th>Description</th>
     </tr>
-    
-}
+
+    @foreach (var beer in Model)
+    {
+        <tr>
+            <td><img src="data:image/png;base64,@Convert.ToBase64String(beer.Image)" /></td>
+            <td>@beer.Name</td>
+            <td>@beer.BreweryName</td>
+            <td>@beer.Description</td>
+        </tr>
+    }
 </table>
