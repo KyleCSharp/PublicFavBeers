@@ -10,20 +10,15 @@
     left: 0;
     z-index: -1;
 }
-
-img {
-    max-width: 300px;
-    max-height: 300px;
-}
-
-.table {
-    margin-top:20px;
+.container {
+    margin-top: 20px;
     text-align: center;
-    background-color: rgb(182, 109, 1, 0.7);
-    
-}
-.welcome
-{
-    text-align:center;
-    color:white;
+    background-color: rgb(182, 109, 1, 0.9);
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
 }
