@@ -29,3 +29,30 @@ img {
     text-align:center;
     color:white;
 }
+/* Media query for small screens */
+@media screen and (max-width: 480px) {
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        display: block;
+        width: 100%;
+    }
+
+    th {
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+        border-bottom: none;
+    }
+
+        td:before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+}
