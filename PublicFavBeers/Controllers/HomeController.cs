@@ -26,32 +26,36 @@ namespace PublicFavBeers.Controllers
         }
         [HttpPost]
         public IActionResult Upload(ImageViewModel model)
-
         {
-            if (model == null)
+            try
             {
                 
-                return BadRequest();
+                byte[]? data = null;
+                using (var ms = new MemoryStream())
+                {
+                    model.Data.CopyTo(ms);
+                    data = ms.ToArray();
+                }
+
+                var picture = new BeerModel()
+                {
+                    Name = model.Name,
+                    Image = data,
+                    id = model.id,
+                    Description = model.Description,
+                    BreweryName = model.BreweryName
+                };
+
+                _BeerRepo.InsertBeer(picture);
+
+                return RedirectToAction("Index", "Home");
             }
-            byte[]? data = null;
-            using (var ms = new MemoryStream())
+            catch (Exception)
             {
-                model.Data.CopyTo(ms);
-                data = ms.ToArray();
+
+                return View("errorpage");
             }
-
-            var picture = new BeerModel()
-            {
-                Name = model.Name,
-                Image = data,
-                id = model.id,
-                Description= model.Description,
-                BreweryName = model.BreweryName
-            };
-
-            _BeerRepo.InsertBeer(picture);
-
-            return RedirectToAction("Index", "Home");
+            
         }
 
 

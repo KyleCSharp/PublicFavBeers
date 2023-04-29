@@ -23,6 +23,7 @@ namespace PublicFavBeers.Repo
         [HttpPost]
         public void InsertBeer(BeerModel beerToInsert)
         {
+
             using var conn = new SqlConnection(_config.GetConnectionString());
             conn.Open();
             conn.Execute("INSERT INTO dbo.PublicFavBeer (Name, Image, Description, BreweryName) VALUES (@Name, @Image, @Description, @BreweryName);",
