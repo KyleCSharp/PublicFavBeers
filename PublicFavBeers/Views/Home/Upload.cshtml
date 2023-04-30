@@ -29,21 +29,8 @@
             <button id="submit" class="btn btn-primary" disabled>Upload!</button>
         </div>
     </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/upload-form.js"></script>
 </div>
 
-<script>
-    
-    const passwordInput = document.getElementById('password');
-    const submitButton = document.getElementById('submit');
-    const correctPassword = 'password123'; // this will be changed after git push
 
-    function checkPassword() {
-        if (passwordInput.value === correctPassword) {
-            submitButton.disabled = false;
-        } else {
-            submitButton.disabled = true;
-        }
-    }
-
-    passwordInput.addEventListener('input', checkPassword);
-</script>
